@@ -9,14 +9,27 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+#[Route('/main', name: 'app_main')]
 class MainController extends AbstractController
 {
-    #[Route('/main', name: 'app_main')]
+    #[Route('/', name: 'hello')]
     public function index(): Response
     {
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
+        ]);
+    }
+
+    #[Route('/{id1}/{id2}', name: 'sum')]
+    public function sum(int $id1, int $id2): Response
+    {
+        $random = random_int(1,12);
+        $sum = $id1 + $id2 + $random;
+        return $this->render('main/sum.html.twig', [
+            'id1' => $id1,
+            'id2' => $id2,
+            'sum' => $sum,
+            'random' => $random,
         ]);
     }
 

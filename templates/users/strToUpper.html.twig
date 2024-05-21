@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users List!{% endblock %}
+{% block title %}String to Upper{% endblock %}
 
 {% block body %}
 <style>
@@ -9,14 +9,9 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello world! ✅</h1>
+    <h1>Upper string of "{{ str }}" </h1>
 
-    <ul>
-        {% for user in users %}
-            <li>
-                {{ user.id }}. {{ user.login }} - {{ user.status }}
-            </li>
-        {% endfor %}
-    </ul>
+    RESULT:  {{ strUpper }}
+{#    {{ include('users/info.html.twig') }}#}
 </div>
 {% endblock %}

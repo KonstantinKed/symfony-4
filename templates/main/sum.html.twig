@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users List!{% endblock %}
+{% block title %}Hello to lucky sum maker{% endblock %}
 
 {% block body %}
 <style>
@@ -9,14 +9,9 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello world! ✅</h1>
-
-    <ul>
-        {% for user in users %}
-            <li>
-                {{ user.id }}. {{ user.login }} - {{ user.status }}
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Hello to lucky sum maker</h1>
+    Before calculation we have added random bonus in the amount of {{ random }} <br>
+    Here is yor result:
+    {{ id1 }} + {{ id2 }} + {{ random }} = {{ sum }}
 </div>
 {% endblock %}

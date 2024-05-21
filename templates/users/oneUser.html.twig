@@ -9,14 +9,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello world! ✅</h1>
+    <h1>User info for {{ user.login }} </h1>
 
-    <ul>
-        {% for user in users %}
-            <li>
-                {{ user.id }}. {{ user.login }} - {{ user.status }}
-            </li>
-        {% endfor %}
-    </ul>
+    {{ include('users/info.html.twig') }}
 </div>
 {% endblock %}
