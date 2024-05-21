@@ -23,12 +23,17 @@ class MainController extends AbstractController
     #[Route('/{id1}/{id2}', name: 'sum')]
     public function sum(int $id1, int $id2): Response
     {
-        $random = random_int(1,12);
-        $sum = $id1 + $id2 + $random;
-        return $this->render('main/sum.html.twig', [
+        $flatComm = 5;
+        $random = random_int(1, 3);
+        $baseFee = $id1 * $flatComm /100 * $id2;
+        $totalFee = $id1 * ($flatComm - $random)/100 * $id2;
+
+        return $this->render('main/bank.html.twig', [
             'id1' => $id1,
             'id2' => $id2,
-            'sum' => $sum,
+            'flatComm' => $flatComm,
+            'baseFee' => $baseFee,
+            'totalFee' => $totalFee,
             'random' => $random,
         ]);
     }
