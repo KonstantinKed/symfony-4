@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\UrlCodePairEntity;
 use App\Entity\User;
 use App\Repository\UrlCodePairRepository;
+use App\Services\Factories\UrlCodePairFactory;
 use App\Shortener\Exceptions\DataNotFoundException;
 use App\Shortener\Interfaces\ICodeSaver;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,10 +15,11 @@ class ShortenerDoctrineRepository implements ICodeSaver
 {
     /**
      * @var UrlCodePairRepository
-    */
+     */
     protected ObjectRepository $repository;
 
-    public function __construct(protected EntityManagerInterface $em)
+    public function __construct(protected EntityManagerInterface $em,
+    protected UrlCodePairFactory $factory)
     {
         $this->repository = $this->em->getRepository(UrlCodePairEntity::class);
     }
@@ -25,9 +27,7 @@ class ShortenerDoctrineRepository implements ICodeSaver
     public function saveShortAndUrl(string $url, string $code): bool
     {
         try {
-            $entity = new UrlCodePairEntity($url, $code);
-            $this->em->persist($entity);
-            $this->em->flush();
+            $this->factory->fromUrlCodePair($url, $code);
             $result = true;
         } catch (\Throwable) {
             $result = false;
