@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users List!{{ parent() }}{% endblock %}
+{% block page_name %}Users List{% endblock %}
+
+{% block content %}
+    <div class="example-wrapper">
+        <h1>Users List! ✅</h1>
+        <div>
+            {% for user in users %}
+                {{ include('users/info.html.twig') }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
