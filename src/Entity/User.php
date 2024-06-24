@@ -5,14 +5,18 @@ namespace App\Entity;
 
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
-class User
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
     const STATUS_DISABLED = 0;
@@ -27,7 +31,7 @@ class User
     #[ORM\Column(length: 60)]
     private string $login;
 
-    #[ORM\Column(length: 32)]
+    #[ORM\Column()]
     private string $password;
 
     #[ORM\OneToMany(targetEntity: Phone::class, mappedBy: 'user', fetch: 'LAZY')]
@@ -36,20 +40,36 @@ class User
     #[ORM\Column(type: Types::SMALLINT)]
     private int $status = 0;
 
+    #[ORM\Column(length: 60, unique: true, nullable: false)]
+    private string $email;
+
+    #[ORM\Column(length: 32, unique: true, nullable: false)]
+    private string $apiToken;
 
     /**
      * @param string $login
      * @param string $password
      * @param int $status
      */
-    public function __construct(string $login, string $password, int $status = self::STATUS_DISABLED)
+    public function __construct()
     {
-        $this->login = $login;
-        $this->changePassword($password);
-        $this->status = $status;
         $this->phones = new ArrayCollection();
+        $this->generateApiToken();
+    }
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
     /**
      * @return int
      */
@@ -95,7 +115,7 @@ class User
      */
     public function changePassword(string $password): void
     {
-        $this->password = md5($password);
+        $this->password = $password;
     }
 
     public function isActiveUser(): bool
@@ -143,6 +163,32 @@ class User
     public function addPhone(Phone $phone): void
     {
         $this->phones->add($phone);
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials(): void
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getEmail();
+    }
+
+    public function getApiToken(): string
+    {
+        return $this->apiToken;
+    }
+
+    public function generateApiToken(): static
+    {
+        $this->apiToken = md5(mt_rand() . (new DateTime())->getTimestamp());
+
+        return $this;
     }
 
 }

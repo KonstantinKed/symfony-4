@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Url Info {{ url_code.code }}{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="example-wrapper">
+        <h1>Url info {{ url_code.url }} ✅</h1>
+
+        {{ include('url/url_info.html.twig') }}
+    </div>
+{% endblock %}
+{% block page_name %}<a href="{{ path('short_codes_stats') }}">Url statistics</a> > {{ url_code.code }}{% endblock %}

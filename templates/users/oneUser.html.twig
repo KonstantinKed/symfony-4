@@ -15,4 +15,4 @@
 </div>
 {% endblock %}
 
-{% block page_name %}{{ user.login }}{% endblock %}
+{% block page_name %}<a href="{{ path('app_users_list') }}">Users List</a> -> {{ user.login }}{% endblock %}

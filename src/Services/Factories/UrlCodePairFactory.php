@@ -6,6 +6,7 @@ use App\Entity\UrlCodePairEntity;
 use App\Repository\UrlCodePairRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
+use InvalidArgumentException;
 
 class UrlCodePairFactory
 {
@@ -22,6 +23,18 @@ class UrlCodePairFactory
     public function fromUrlCodePair(string $url, string $code): UrlCodePairEntity
     {
         $entity = new UrlCodePairEntity($url, $code);
+        $this->em->persist($entity);
+        $this->em->flush();
+
+        return $entity;
+    }
+
+    public function fromArray($data): UrlCodePairEntity
+    {
+        if(!isset($data['url']) || !isset($data['code'])) {
+         throw new InvalidArgumentException();
+        }
+        $entity = new UrlCodePairEntity($data['url'], $data['code']);
         $this->em->persist($entity);
         $this->em->flush();
 

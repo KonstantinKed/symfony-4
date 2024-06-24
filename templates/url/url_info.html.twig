@@ -1,0 +1,18 @@
+<div class="plate container">
+    <div class="row">
+        <div class="col-3">
+            {{ print_favicon(url_code.url)| raw }}
+            <br>
+
+        </div>
+        <div class="col">
+            <a href="{{ path('short_code_stat', {'code':  url_code.code}) }}">{{ url_code.code }}</a>:
+            <a href="{{ url_code.url }}">{{ url_code.url }}</a>  - Переходів: {{ url_code.count }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            {% block additonal %} {% endblock %}
+        </div>
+    </div>
+</div>

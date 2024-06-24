@@ -49,5 +49,17 @@ class UrlCodePairEntity
         return $this->code;
     }
 
+    public function increment(): void
+    {
+        $this->incrementCount();
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
 
 }

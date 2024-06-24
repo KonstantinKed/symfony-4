@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    .newUrl {
+    margin-bottom: 20px;
+    }
+{% endblock %}
+
+{% block title %}Urls list{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="example-wrapper">
+        <h1>Urls list  ✅</h1>
+        <div class="newUrl">
+{#            <form action="{{ path('short_encode') }}" method="post">#}
+{#                <label>#}
+{#                    Додати скорочення#}
+{#                    <input type="text" name="url" placeholder="some url" required>#}
+{#                </label>#}
+{#                <button type="submit">Додати</button>#}
+{#            </form>#}
+        </div>
+        {% for url_code in url_codes %}
+            {{ include('url/url_info.html.twig') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block page_name %}Urls statistics{% endblock %}
