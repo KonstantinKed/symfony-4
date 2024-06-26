@@ -19,7 +19,7 @@ class IncrementorService
             $this->em->persist($object);
             $this->em->flush();
         } catch (Throwable) {
-
+            // no need to work out further, if object is VO - it will increment only;
         }
     }
 }

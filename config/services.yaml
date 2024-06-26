@@ -32,6 +32,16 @@ services:
     GuzzleHttp\Client:
         class: GuzzleHttp\Client
 
+    App\Services\MenuBuilder:
+        class: App\Services\MenuBuilder
+        arguments: [ "@knp_menu.factory" ]
+
+    app.main_menu:
+        class: Knp\Menu\MenuItem
+        factory: [ '@App\Services\MenuBuilder', createMainMenu ]
+        tags:
+            - { name: knp_menu.menu, alias: main }
+
 #    App\Shortener\SuportAction\SimpleUrlValidator:
 #        arguments:
 #            $client: '@GuzzleHttp\Client'

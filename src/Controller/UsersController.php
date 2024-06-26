@@ -28,6 +28,7 @@ class UsersController extends AbstractController
             'user' => $user,
         ]);
     }
+
     #[Route('/toUpper/{str}', name: 'toUpper')]
     public function toUpper(string $str): Response
     {

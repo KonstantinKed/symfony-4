@@ -17,7 +17,7 @@ class UrlCodesService
         $this->repository = $this->em->getRepository(UrlCodePairEntity::class);
     }
 
-    public function getAllByUser():array
+    public function getAllByUser():array //User: $user
     {
         return $this->repository->findAll();
     }

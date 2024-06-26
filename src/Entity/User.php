@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -43,20 +44,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 60, unique: true, nullable: false)]
     private string $email;
 
-    #[ORM\Column(length: 32, unique: true, nullable: false)]
-    private string $apiToken;
+//    #[ORM\Column(length: 32, unique: true, nullable: false)]
+//    private string $apiToken;
 
     /**
-     * @param string $login
+     * @param string $email
      * @param string $password
      * @param int $status
      */
-    public function __construct()
+    public function __construct(string $email, string $password, int $status = self::STATUS_DISABLED)
     {
         $this->phones = new ArrayCollection();
-        $this->generateApiToken();
+        $this->email = $email;
+        $this->changePassword($password);
+        $this->status = $status;
+//        $this->generateApiToken();
     }
-    public function setEmail(string $email): static
+
+    public function setEmail(string $email): static  //! potential problem
     {
         $this->email = $email;
 

@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\IIncremental;
 use App\Repository\UrlCodePairRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UrlCodePairRepository::class)]
 #[ORM\Table(name:'url_code_pair')]
-class UrlCodePairEntity
+class UrlCodePairEntity implements IIncremental
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,7 +25,7 @@ class UrlCodePairEntity
     public function __construct(
         #[ORM\Column(length: 255)]
         private string $url,
-        #[ORM\Column(length: 8)]
+        #[ORM\Column(length: 8, unique: true)]
         private string $code
     )
     {}
@@ -52,6 +53,11 @@ class UrlCodePairEntity
     public function increment(): void
     {
         $this->incrementCount();
+    }
+
+    public function count(): int
+    {
+        return $this->count;
     }
 
     /**

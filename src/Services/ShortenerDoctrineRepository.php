@@ -40,15 +40,19 @@ class ShortenerDoctrineRepository implements ICodeSaver
         return $this->getData(['url' => $url], "Code is not set")->getCode();
     }
 
+    /**
+     * @throws DataNotFoundException
+     */
     public function getUrlByCode(string $code): ?string
     {
         return $this->getData(['code' => $code], "Url was not found")->getUrl();
     }
 
-    protected function getData(array $parametrs, string $errorMessage): UrlCodePairEntity
+    protected function getData(array $parameters, string $errorMessage): UrlCodePairEntity
     {
-        if (is_null($entity = $this->repository->findOneBy($parametrs))) {
+        if (is_null($entity = $this->repository->findOneBy($parameters))) {
             throw new DataNotFoundException($errorMessage);
         }
+        return $entity;
     }
 }

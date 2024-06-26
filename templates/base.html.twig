@@ -10,6 +10,11 @@
         <style>
             .container {
             }
+            .body {
+                background: white;
+            }
+
+
             #content {
                 padding: 10px;
                 text-align: left !important;
@@ -40,15 +45,13 @@
             <div class="container text-center">
                 <div class="row">
                     <div class="col-2">
-                        {% for item in main_menu() %}
-                            <li><a href="{{ item.path }}">{{ item.name }}</a></li>
-                        {% endfor %}
+                        {{ include('mainmenu.html.twig') }}
                         {% block sidebar %}{% endblock %}
                     </div>
                     <div class="col">
                         <section id="bread-crumbs">
-                            <a href="{{ path('app_mainhello') }}">Home page</a>
-                            {% if app.current_route != 'app_mainhello' %}
+                            <a href="{{ path('app_main') }}">Home page</a>
+                            {% if app.current_route != 'app_main' %}
                                 -> {% block page_name %}{% endblock %}
                             {% endif %}
                             </section>
