@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     private int $id;
 
-    #[ORM\Column(length: 60)]
+    #[ORM\Column(length: 60, nullable: true)]
     private string $login;
 
     #[ORM\Column()]
@@ -47,17 +47,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //    #[ORM\Column(length: 32, unique: true, nullable: false)]
 //    private string $apiToken;
 
-    /**
-     * @param string $email
-     * @param string $password
-     * @param int $status
-     */
-    public function __construct(string $email, string $password, int $status = self::STATUS_DISABLED)
+    public function __construct()
     {
         $this->phones = new ArrayCollection();
-        $this->email = $email;
-        $this->changePassword($password);
-        $this->status = $status;
 //        $this->generateApiToken();
     }
 
