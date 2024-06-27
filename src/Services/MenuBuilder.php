@@ -29,7 +29,7 @@ class MenuBuilder
         $menu->addChild('Home page', ['route' => 'app_main'])->setAttributes($liCss)->setLinkAttributes($aCss);
         if ($this->security->getUser()) {
             $menu->addChild('Users', ['route' => 'app_users_list'])->setAttributes($liCss)->setLinkAttributes($aCss);
-            $menu->addChild('Shorts/Add url', ['route' => 'short_codes_stats'])->setAttributes($liCss)->setLinkAttributes($aCss);
+            $menu->addChild('Your shorts/Add url', ['route' => 'short_codes_stats'])->setAttributes($liCss)->setLinkAttributes($aCss);
         }
 
         return $menu;

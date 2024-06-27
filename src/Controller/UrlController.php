@@ -22,13 +22,6 @@ class UrlController extends AbstractController
         return $this->redirectToRoute('short_code_stat', ['code' => $code]);
     }
 
-//    #[Route('/{code}/stats', name: 'code_stat', requirements: ['code'=>'\w{6,8}'])]
-//    public function decode(UrlCodePairEntity $urlCodePair): Response
-//    {
-//        return $this->render('url/url_code.html.twig', [
-//            'url_code' =>  $urlCodePair,
-//        ]);
-//    }
     #[Route('/decode/{code}', name: 'code_stat', requirements: ['code'=>'\w{6,8}'])]
     public function decode(UrlCodePairEntity $urlCodePair): Response
     {
@@ -51,5 +44,16 @@ class UrlController extends AbstractController
         $incrementorService->incrementAndSave($urlCodePair);
         return $this->redirect($urlCodePair->getUrl());
     }
+
+
+//    #[Route('/{code}/stats', name: 'code_stat', requirements: ['code'=>'\w{6,8}'])]
+//    public function decode(UrlCodePairEntity $urlCodePair): Response
+//    {
+//        return $this->render('url/url_code.html.twig', [
+//            'url_code' =>  $urlCodePair,
+//        ]);
+//    }
+
+
 
 }
