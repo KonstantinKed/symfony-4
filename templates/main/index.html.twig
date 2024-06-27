@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    .firstPic {
+    margin: 10px;
+    max-width:900px
+    }
+    .firstPic img {
+    width: 100%
+    }
+{% endblock %}
 {% block title %}Main page {{ parent() }}{% endblock %}
 
 {% block content %}
 
     <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
+        <h1>SHORTENER</h1>
+        <div class="firstPic">
+            <img src="https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2022/01/url-shortener.jpg" alt="shortener"/>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code>/srv/src/app/src/Controller/MainController.php</code></li>
-            <li>Your template at <code>/srv/src/app/templates/main/index.html.twig</code></li>
-        </ul>
+        </div>
 </div>
 {% endblock %}

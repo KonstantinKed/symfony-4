@@ -6,7 +6,11 @@
 
         </div>
         <div class="col">
-            <a href="{{ path('short_code_stat', {'code':  url_code.code}) }}">{{ url_code.code }}</a>:
+            {% if app.current_route != 'short_code_stat' %}
+                <a href="{{ path('short_code_stat', {'code':  url_code.code}) }}">{{ url_code.code }}</a>:
+            {% else %}
+                <a class="redirect" href="{{ path('short_redirect', {'code':  url_code.code}) }}" target="_blank">-> {{ url_code.code }}</a>:
+            {% endif %}
             <a href="{{ url_code.url }}">{{ url_code.url }}</a>  - Переходів: {{ url_code.count }}
         </div>
     </div>
