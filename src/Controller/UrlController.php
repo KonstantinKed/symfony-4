@@ -19,7 +19,7 @@ class UrlController extends AbstractController
     {
         $url = $request->get('url');
         $code = $encoder->encode($url);
-        return new Response($code);
+        return $this->redirectToRoute('short_code_stat', ['code' => $code]);
     }
 
 //    #[Route('/{code}/stats', name: 'code_stat', requirements: ['code'=>'\w{6,8}'])]

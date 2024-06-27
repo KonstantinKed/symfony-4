@@ -12,13 +12,13 @@
     <div class="example-wrapper">
         <h1>Urls list  ✅</h1>
         <div class="newUrl">
-{#            <form action="{{ path('short_encode') }}" method="post">#}
-{#                <label>#}
-{#                    Додати скорочення#}
-{#                    <input type="text" name="url" placeholder="some url" required>#}
-{#                </label>#}
-{#                <button type="submit">Додати</button>#}
-{#            </form>#}
+            <form action="{{ path('short_encode') }}" method="post">
+                <label>
+                    Add url to get short
+                    <input type="text" name="url" placeholder="add url here" required>
+                </label>
+                <button type="submit">Generate short</button>
+            </form>
         </div>
         {% for url_code in url_codes %}
             {{ include('url/url_info.html.twig') }}

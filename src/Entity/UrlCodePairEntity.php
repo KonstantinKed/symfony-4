@@ -26,7 +26,10 @@ class UrlCodePairEntity implements IIncremental
         #[ORM\Column(length: 255)]
         private string $url,
         #[ORM\Column(length: 8, unique: true)]
-        private string $code
+        private string $code,
+        #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'urls')]
+        #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+        private User $user
     )
     {}
     public function getId(): ?int
